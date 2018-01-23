@@ -14,6 +14,7 @@ import ChevronLeftIcon from "material-ui-icons/ChevronLeft";
 import ChevronRightIcon from "material-ui-icons/ChevronRight";
 import ListItem from "material-ui/List/ListItem";
 import ListItemText from "material-ui/List/ListItemText";
+import logo from "../images/cylogo.svg";
 
 const drawerWidth = 400;
 
@@ -95,16 +96,13 @@ const styles = theme => ({
 });
 
 class Menu extends Component {
-  state = {
-    open: true
-  };
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.props.menuAction(true)
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.props.menuAction(false)
   };
 
   render() {
@@ -112,7 +110,7 @@ class Menu extends Component {
 
     return (
       <div className={classes.root}>
-        <Drawer anchor="left" open={this.state.open}>
+        <Drawer type="persistent" anchor="left" open={this.props.menuOpen}>
           <div className={classes.drawerInner}>
             <div className={classes.drawerHeader}>
               <IconButton onClick={this.handleDrawerClose}>
@@ -127,7 +125,10 @@ class Menu extends Component {
             <Divider />
             <List className={classes.list}>
               <ListItem>
+                
+                <img src={logo} className="App-logo" alt="logo" />
                 <ListItemText>Test 1</ListItemText>
+
               </ListItem>
             </List>
             <Divider />

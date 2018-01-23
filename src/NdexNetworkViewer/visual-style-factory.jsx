@@ -1,4 +1,5 @@
 const edgeColor = "#AAAAAA";
+
 const sizeCalculator = ele => {
   const size = ele.data("Size");
   if (size !== undefined) {

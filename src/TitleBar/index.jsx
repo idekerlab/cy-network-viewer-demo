@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 
 import { withStyles } from "material-ui/styles";
-import logo from "./cylogo.svg";
 
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
+
 import IconButton from "material-ui/IconButton";
-import CloseIcon from "material-ui-icons/KeyboardArrowLeft";
+
+import CloseIcon from "material-ui-icons/Close";
+import LoadIcon from "material-ui-icons/Refresh";
+
 import SettingsIcon from "material-ui-icons/Settings";
 import TextField from "material-ui/TextField";
 
@@ -15,8 +18,6 @@ import MenuIcon from "material-ui-icons/Menu";
 
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl, FormHelperText } from "material-ui/Form";
-
-import Button from "material-ui/Button";
 
 const styles = {
   root: {
@@ -36,29 +37,49 @@ const styles = {
 
 class TitleBar extends Component {
   state = {
-    uuid: ""
+    uuid: null
   };
 
   handleChange = event => {
-    console.log(event.target.value);
-
     this.setState({
       uuid: event.target.value
     });
   };
 
   handleLoad = event => {
-    console.log("Load");
+    console.log("Start Load");
+    this.props.uuidAction(this.state.uuid);
+  };
+
+  handleClear = event => {
+    this.setState({
+      uuid: ""
+    });
+  };
+
+  handleMenuOpen = event => {
+    this.props.menuAction(true);
   };
 
   render() {
     const { classes } = this.props;
 
+    let uuid = this.state.uuid;
+    if (uuid === null) {
+      uuid = this.props.uuid;
+      this.setState({
+        uuid
+      });
+    }
+
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <IconButton className={classes.menuButton}>
+            <IconButton
+              className={classes.menuButton}
+              onClick={this.handleMenuOpen}
+            >
               <MenuIcon color="contrast" aria-label="Menu" />
             </IconButton>
 
@@ -74,13 +95,15 @@ class TitleBar extends Component {
               style={{ width: "18em", fontSize: "1.5em", color: "#FFFFFF" }}
               margin="dense"
               onChange={this.handleChange}
+              value={uuid}
             />
 
-            <Button raised color="default" onClick={this.handleLoad}>
-              Load
-            </Button>
-
-            <img src={logo} className="App-logo" alt="logo" />
+            <IconButton color="contrast" onClick={this.handleLoad}>
+              <LoadIcon />
+            </IconButton>
+            <IconButton color="contrast" onClick={this.handleClear}>
+              <CloseIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
       </div>
