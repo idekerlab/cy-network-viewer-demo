@@ -74,8 +74,6 @@ class NetworkViewer extends Component {
     fetch(url)
       .then(response => response.json())
       .then(network => {
-        console.log("CX!!!!!!!!!!!!!!!!!!!!");
-        console.log(network);
         this.postCx(this.replaceVisTag(network));
       })
       .catch(console.error);
@@ -104,12 +102,16 @@ class NetworkViewer extends Component {
         style: this.state.visualStyle
       };
     }
+
     return (
       <div style={{width: '100%', height: '100%', paddingTop: '4.3em'}}>
         <Viewer
           {...this.props}
           network={this.state.network}
           networkStyle={visualStyle}
+          rendererOptions={{
+            layout: this.props.layoutName
+          }}
         />
       </div>
     );

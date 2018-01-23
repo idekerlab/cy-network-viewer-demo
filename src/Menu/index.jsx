@@ -16,6 +16,8 @@ import ListItem from "material-ui/List/ListItem";
 import ListItemText from "material-ui/List/ListItemText";
 import logo from "../images/cylogo.svg";
 
+import Layouts from '../Layouts'
+
 const drawerWidth = 400;
 
 const styles = theme => ({
@@ -96,13 +98,12 @@ const styles = theme => ({
 });
 
 class Menu extends Component {
-
   handleDrawerOpen = () => {
-    this.props.menuAction(true)
+    this.props.menuAction(true);
   };
 
   handleDrawerClose = () => {
-    this.props.menuAction(false)
+    this.props.menuAction(false);
   };
 
   render() {
@@ -113,6 +114,8 @@ class Menu extends Component {
         <Drawer type="persistent" anchor="left" open={this.props.menuOpen}>
           <div className={classes.drawerInner}>
             <div className={classes.drawerHeader}>
+              <img src={logo} className="App-logo" alt="logo" />
+              <Typography type="title">NDEx Network Viewer Demo</Typography>
               <IconButton onClick={this.handleDrawerClose}>
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon />
@@ -123,12 +126,12 @@ class Menu extends Component {
             </div>
 
             <Divider />
+
+            <Layouts {...this.props} />
+            
             <List className={classes.list}>
               <ListItem>
-                
-                <img src={logo} className="App-logo" alt="logo" />
                 <ListItemText>Test 1</ListItemText>
-
               </ListItem>
             </List>
             <Divider />

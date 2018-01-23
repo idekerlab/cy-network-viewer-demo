@@ -12,7 +12,8 @@ const DEF_UUID = "604b7f35-68d6-11e7-961c-0ac135e8bacf";
 class App extends Component {
   state = {
     uuid: DEF_UUID,
-    menuOpen: false
+    menuOpen: false,
+    layoutName: 'preset'
   };
 
   uuidAction = uuid => {
@@ -25,9 +26,17 @@ class App extends Component {
     this.setState({
       menuOpen
     })
-  }  
+  }
+
+  layoutAction = layoutName => {
+    console.log('!!! LAYOUT UPDATE: ' + layoutName)
+    this.setState({
+      layoutName
+    })
+  }
 
   render() {
+    console.log('!!! LAYOUT UPDATE render: ' + this.state.layoutName)
     return (
       <div className="App">
         <TitleBar 
@@ -40,11 +49,13 @@ class App extends Component {
         <Menu 
           menuOpen={this.state.menuOpen}
           menuAction={this.menuAction}
+          layoutAction={this.layoutAction}
         />
         
         <NdexNetworkViewer 
           className="NetworkViewer"
           uuid={this.state.uuid}
+          layoutName={this.state.layoutName}
         />
       </div>
     );
