@@ -2,6 +2,7 @@
   "name": "cy-network-viewer-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://idekerlab.github.io/cy-network-viewewr-demo",
   "dependencies": {
     "cy-network-viewer": "^0.1.0",
     "cytoscapejs-renderer": "^0.1.0",
